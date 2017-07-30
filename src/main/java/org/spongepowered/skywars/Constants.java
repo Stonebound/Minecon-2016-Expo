@@ -40,7 +40,6 @@ import org.spongepowered.api.world.difficulty.Difficulties;
 import org.spongepowered.skywars.instance.gen.InstanceMutator;
 import org.spongepowered.skywars.instance.gen.InstanceMutatorRegistryModule;
 
-import javax.xml.bind.annotation.XmlType;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
