@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special.instance.exception;
+package org.spongepowered.skywars.instance.exception;
 
 public class UnknownInstanceException extends Exception {
 

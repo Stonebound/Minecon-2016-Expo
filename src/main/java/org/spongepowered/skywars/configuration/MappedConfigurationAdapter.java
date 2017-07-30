@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special.configuration;
+package org.spongepowered.skywars.configuration;
 
 import com.typesafe.config.ConfigRenderOptions;
 import ninja.leaping.configurate.ConfigurationNode;
@@ -50,7 +50,6 @@ public final class MappedConfigurationAdapter<T extends AbstractConfiguration> {
         this.configClass = configClass;
         this.configPath = configPath;
         this.loader = HoconConfigurationLoader.builder()
-                .setRenderOptions(ConfigRenderOptions.defaults().setFormatted(true).setComments(true).setOriginComments(false))
                 .setDefaultOptions(options)
                 .setPath(configPath).build();
         try {

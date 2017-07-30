@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,13 +22,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special.instance.gen.loot;
+package org.spongepowered.skywars.instance.gen.loot;
 
 import static org.spongepowered.api.util.weighted.VariableAmount.fixed;
 import static org.spongepowered.api.util.weighted.VariableAmount.range;
-import static org.spongepowered.special.instance.gen.loot.PotionItemArchetype.Type.LINGERING;
-import static org.spongepowered.special.instance.gen.loot.PotionItemArchetype.Type.NORMAL;
-import static org.spongepowered.special.instance.gen.loot.PotionItemArchetype.Type.SPLASH;
+import static org.spongepowered.skywars.instance.gen.loot.PotionItemArchetype.Type.LINGERING;
+import static org.spongepowered.skywars.instance.gen.loot.PotionItemArchetype.Type.NORMAL;
+import static org.spongepowered.skywars.instance.gen.loot.PotionItemArchetype.Type.SPLASH;
 
 import com.google.common.collect.Maps;
 import org.spongepowered.api.effect.potion.PotionEffectType;

@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special.instance.gen.mutator;
+package org.spongepowered.skywars.instance.gen.mutator;
 
 import com.google.common.base.Objects;
 import org.spongepowered.api.block.BlockState;
@@ -30,9 +30,9 @@ import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.block.tileentity.Sign;
 import org.spongepowered.api.block.tileentity.TileEntity;
 import org.spongepowered.api.world.extent.Extent;
-import org.spongepowered.special.Special;
-import org.spongepowered.special.instance.Instance;
-import org.spongepowered.special.instance.gen.InstanceMutator;
+import org.spongepowered.skywars.Skywars;
+import org.spongepowered.skywars.instance.Instance;
+import org.spongepowered.skywars.instance.gen.InstanceMutator;
 
 abstract class SignMutator extends InstanceMutator {
 
@@ -63,8 +63,9 @@ abstract class SignMutator extends InstanceMutator {
         final Sign sign = (Sign) tileEntity;
         if (!sign.lines().get(0).toPlain().equalsIgnoreCase(this.sign_id)) {
             if (sign.lines().get(1).toPlain().equalsIgnoreCase(this.sign_id)) {
-                Special.instance.getLogger().error("Found mismatched sign at {}x {}y {}z!", x, y, z);
+                Skywars.instance.getLogger().error("Found mismatched sign at {}x {}y {}z!", x, y, z);
             } else {
+                Skywars.instance.getLogger().warn("Sign at {}x {}y {}z!", sign.lines().get(0).toPlain());
                 return null;
             }
         }

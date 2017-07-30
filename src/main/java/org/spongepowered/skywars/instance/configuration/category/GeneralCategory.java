@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,13 +22,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special.instance.configuration.category;
+package org.spongepowered.skywars.instance.configuration.category;
 
 import ninja.leaping.configurate.objectmapping.Setting;
 import ninja.leaping.configurate.objectmapping.serialize.ConfigSerializable;
 import org.spongepowered.api.text.TextTemplate;
-import org.spongepowered.special.Constants;
-import org.spongepowered.special.configuration.AbstractConfigurationCategory;
+import org.spongepowered.skywars.Constants;
+import org.spongepowered.skywars.configuration.AbstractConfigurationCategory;
 
 import java.util.List;
 

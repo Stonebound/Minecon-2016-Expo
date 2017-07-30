@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special;
+package org.spongepowered.skywars;
 
 import static org.spongepowered.api.command.args.GenericArguments.bool;
 import static org.spongepowered.api.command.args.GenericArguments.catalogedElement;
@@ -49,12 +49,12 @@ import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.SerializationBehavior;
 import org.spongepowered.api.world.World;
 import org.spongepowered.api.world.storage.WorldProperties;
-import org.spongepowered.special.configuration.MappedConfigurationAdapter;
-import org.spongepowered.special.instance.Instance;
-import org.spongepowered.special.instance.InstanceType;
-import org.spongepowered.special.instance.InstanceTypeRegistryModule;
-import org.spongepowered.special.instance.configuration.InstanceTypeConfiguration;
-import org.spongepowered.special.instance.exception.UnknownInstanceException;
+import org.spongepowered.skywars.configuration.MappedConfigurationAdapter;
+import org.spongepowered.skywars.instance.Instance;
+import org.spongepowered.skywars.instance.InstanceType;
+import org.spongepowered.skywars.instance.InstanceTypeRegistryModule;
+import org.spongepowered.skywars.instance.configuration.InstanceTypeConfiguration;
+import org.spongepowered.skywars.instance.exception.UnknownInstanceException;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -101,7 +101,7 @@ final class Commands {
                         "type ", format(TextColors.LIGHT_PURPLE, instanceType.getName()), "."));
 
                 try {
-                    Special.instance.getInstanceManager().createInstance(targetProperties.getWorldName(), instanceType);
+                    Skywars.instance.getInstanceManager().createInstance(targetProperties.getWorldName(), instanceType);
                 } catch (Exception e) {
                     throw new CommandException(Text.of(e));
                 }
@@ -112,7 +112,7 @@ final class Commands {
 
                         final WorldProperties finalTargetProperties = targetProperties;
                         player.sendMessage(Text.builder().onClick(TextActions.executeCallback(commandSource -> {
-                            Optional<Instance> inst = Special.instance.getInstanceManager().getInstance(finalTargetProperties.getWorldName());
+                            Optional<Instance> inst = Skywars.instance.getInstanceManager().getInstance(finalTargetProperties.getWorldName());
                             if (inst.isPresent()) {
                                 inst.get().registerPlayer((Player) commandSource);
                                 inst.get().spawnPlayer((Player) commandSource);
@@ -166,11 +166,11 @@ final class Commands {
                     throw new CommandException(Text.of("World was not provided!"));
                 }
 
-                final Optional<Instance> optInstance = Special.instance.getInstanceManager().getInstance(world.getName());
+                final Optional<Instance> optInstance = Skywars.instance.getInstanceManager().getInstance(world.getName());
                 if (!optInstance.isPresent() || optInstance.isPresent() && optInstance.get().getState().equals(Instance.State.IDLE)) {
                     try {
                         src.sendMessage(Text.of("Starting round countdown in [", format(TextColors.GREEN, world.getName()), "]."));
-                        Special.instance.getInstanceManager().startInstance(world.getName());
+                        Skywars.instance.getInstanceManager().startInstance(world.getName());
                     } catch (UnknownInstanceException e) {
                         throw new CommandException(Text.of("Unable to start round in [", format(TextColors.GREEN, world.getName()), "], was it ",
                                 "created?"));
@@ -193,12 +193,12 @@ final class Commands {
                 final World world;
                 if (optWorldProperties.isPresent()) {
                     Optional<World> opt = Sponge.getServer().getWorld(optWorldProperties.get().getUniqueId());
-                    if (!opt.isPresent() && Special.instance.getInstanceManager().getInstance(optWorldProperties.get().getWorldName()).isPresent()) {
+                    if (!opt.isPresent() && Skywars.instance.getInstanceManager().getInstance(optWorldProperties.get().getWorldName()).isPresent()) {
                         src.sendMessage(Text.of(Text.of(TextColors.YELLOW,
                                 String.format("World %s was unloaded, but the instance still exists! Ending instance.",
                                         optWorldProperties.get().getWorldName()))));
                         try {
-                            Special.instance.getInstanceManager().endInstance(optWorldProperties.get().getWorldName(), true);
+                            Skywars.instance.getInstanceManager().endInstance(optWorldProperties.get().getWorldName(), true);
                         } catch (UnknownInstanceException e) {
                             e.printStackTrace();
                         }
@@ -216,7 +216,7 @@ final class Commands {
 
                 try {
                     src.sendMessage(Text.of((force ? "Forcibly e" : "E"), "nding round in [", format(TextColors.GREEN, world.getName()), "]."));
-                    Special.instance.getInstanceManager().endInstance(world.getName(), force);
+                    Skywars.instance.getInstanceManager().endInstance(world.getName(), force);
                 } catch (UnknownInstanceException e) {
                     throw new CommandException(Text.of("Unable to end round in [", format(TextColors.GREEN, world.getName()), "]!"));
                 }
@@ -252,7 +252,7 @@ final class Commands {
                     throw new CommandException(Text.of("Player was not specified and source was not a player!"));
                 }
 
-                final Optional<Instance> instance = Special.instance.getInstanceManager().getInstance(world.getName());
+                final Optional<Instance> instance = Skywars.instance.getInstanceManager().getInstance(world.getName());
                 if (!instance.isPresent()) {
                     throw new CommandException(Text.of("Instance [", format(TextColors.GREEN, world.getName()), "] is not a valid instance, is it ",
                             "running?"));
@@ -358,7 +358,7 @@ final class Commands {
             .executor((src, args) -> {
                 WorldProperties properties = args.<WorldProperties>getOne("world").orElse(null);
                 boolean modified = args.<Boolean>getOne("modified").orElse(null);
-                Special.instance.getInstanceManager().setWorldModified(properties.getWorldName(), modified);
+                Skywars.instance.getInstanceManager().setWorldModified(properties.getWorldName(), modified);
 
                 src.sendMessage(
                         Text.of(TextColors.GREEN, String.format("Set modified state of world %s to %s!", properties.getWorldName(), modified)));
@@ -402,7 +402,7 @@ final class Commands {
                     return CommandResult.empty();
                 }
 
-                if (Special.instance.getInstanceManager().getInstance(properties.getWorldName()).isPresent()) {
+                if (Skywars.instance.getInstanceManager().getInstance(properties.getWorldName()).isPresent()) {
                     src.sendMessage(Text.of(TextColors.RED,
                             String.format("Instance %s is currently running! Use '/s end %s' to end it!", properties.getWorldName(),
                                     properties.getWorldName())));

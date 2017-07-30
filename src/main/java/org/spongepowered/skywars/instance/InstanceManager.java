@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special.instance;
+package org.spongepowered.skywars.instance;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -60,11 +60,11 @@ import org.spongepowered.api.world.Dimension;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.SerializationBehaviors;
 import org.spongepowered.api.world.World;
-import org.spongepowered.special.Constants;
-import org.spongepowered.special.Special;
-import org.spongepowered.special.instance.exception.InstanceAlreadyExistsException;
-import org.spongepowered.special.instance.exception.UnknownInstanceException;
-import org.spongepowered.special.instance.gen.InstanceMutatorPipeline;
+import org.spongepowered.skywars.Constants;
+import org.spongepowered.skywars.Skywars;
+import org.spongepowered.skywars.instance.exception.InstanceAlreadyExistsException;
+import org.spongepowered.skywars.instance.exception.UnknownInstanceException;
+import org.spongepowered.skywars.instance.gen.InstanceMutatorPipeline;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -156,7 +156,7 @@ public final class InstanceManager {
     }
 
     public void setWorldModified(String instanceName, boolean modified) {
-        Special.instance.getLogger().error("[Mutator] Setting fast pass availability for instance {} to {}.", instanceName, !modified);
+        Skywars.instance.getLogger().error("[Mutator] Setting fast pass availability for instance {} to {}.", instanceName, !modified);
 
         if (modified) {
             this.canUseFastPass.remove(instanceName);
@@ -381,7 +381,7 @@ public final class InstanceManager {
         if (fromInstance != null) {
             if (toInstance != null && fromInstance.equals(toInstance)) {
                 fromInstance.convertPlayerToSpectator(player);
-                Sponge.getScheduler().createTaskBuilder().execute(task -> fromInstance.convertPlayerToSpectator(player)).submit(Special.instance);
+                Sponge.getScheduler().createTaskBuilder().execute(task -> fromInstance.convertPlayerToSpectator(player)).submit(Skywars.instance);
             } else if (toInstance != null) {
                 player.setScoreboard(toInstance.getScoreboard().getHandle());
             } else {
@@ -450,7 +450,7 @@ public final class InstanceManager {
             block.getLocation().flatMap(Location::getTileEntity).flatMap(t -> t.get(Keys.SIGN_LINES)).ifPresent(lines -> {
                 if (this.isTpSign(lines)) {
                     String name = lines.get(1).toPlain();
-                    Optional<Instance> optInstance = Special.instance.getInstanceManager().getInstance(name);
+                    Optional<Instance> optInstance = Skywars.instance.getInstanceManager().getInstance(name);
                     if (optInstance.isPresent()) {
                         if (!optInstance.get().canRegisterMorePlayers()) {
                             player.sendMessage(Text.of(TextColors.RED, "World is full!"));
@@ -461,7 +461,7 @@ public final class InstanceManager {
                         optInstance.get().spawnPlayer(player);
                     } else {
                         if (name.equals("")) {
-                            Collection<Instance> instances = Special.instance.getInstanceManager().getAll();
+                            Collection<Instance> instances = Skywars.instance.getInstanceManager().getAll();
                             if (instances.size() != 1) {
                                 player.sendMessage(
                                         Text.of(TextColors.RED, String.format("Unable to automatically join select - there are %s to choose "

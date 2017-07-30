@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,35 +22,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special.instance;
+package org.spongepowered.skywars.instance;
 
 import static com.google.common.base.Preconditions.checkState;
 
 import com.flowpowered.math.vector.Vector3d;
 import com.google.common.collect.Queues;
 import com.google.common.collect.Sets;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemStack;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.entity.living.player.gamemode.GameModes;
 import org.spongepowered.api.event.cause.Cause;
-import org.spongepowered.api.item.ItemTypes;
 import org.spongepowered.api.item.inventory.ItemStackSnapshot;
 import org.spongepowered.api.scheduler.Task;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
-import org.spongepowered.special.Constants;
-import org.spongepowered.special.Special;
-import org.spongepowered.special.instance.exception.UnknownInstanceException;
-import org.spongepowered.special.instance.scoreboard.RoundScoreboard;
-import org.spongepowered.special.instance.task.CleanupTask;
-import org.spongepowered.special.instance.task.EndTask;
-import org.spongepowered.special.instance.task.InstanceTask;
-import org.spongepowered.special.instance.task.ProgressTask;
-import org.spongepowered.special.instance.task.StartTask;
+import org.spongepowered.skywars.Constants;
+import org.spongepowered.skywars.Skywars;
+import org.spongepowered.skywars.instance.exception.UnknownInstanceException;
+import org.spongepowered.skywars.instance.scoreboard.RoundScoreboard;
+import org.spongepowered.skywars.instance.task.CleanupTask;
+import org.spongepowered.skywars.instance.task.EndTask;
+import org.spongepowered.skywars.instance.task.InstanceTask;
+import org.spongepowered.skywars.instance.task.ProgressTask;
+import org.spongepowered.skywars.instance.task.StartTask;
 
 import java.lang.ref.WeakReference;
 import java.time.Instant;
@@ -137,7 +133,7 @@ public final class Instance {
     void advanceTo(State state) {
         if (this.worldRef.get() == null) {
             if (state == State.FORCE_STOP) {
-                Special.instance.getInstanceManager().unloadInstance(this);
+                Skywars.instance.getInstanceManager().unloadInstance(this);
                 return;
             }
             throw new RuntimeException("Attempt to advance an instance whose world no longer exists!");
@@ -194,7 +190,7 @@ public final class Instance {
         int playerCount = this.instanceType.getAutomaticStartPlayerCount();
         if (playerCount == this.registeredPlayers.size() && this.state == State.IDLE) {
             try {
-                Special.instance.getInstanceManager().startInstance(this.worldName);
+                Skywars.instance.getInstanceManager().startInstance(this.worldName);
             } catch (UnknownInstanceException e) {
                 e.printStackTrace();
             }
@@ -222,11 +218,7 @@ public final class Instance {
             player.getInventory().clear();
 
             for (ItemStackSnapshot snapshot : this.instanceType.getDefaultItems()) {
-                if (snapshot.getType() == ItemTypes.ELYTRA) {
-                    ((EntityPlayerMP) player).setItemStackToSlot(EntityEquipmentSlot.CHEST, (ItemStack) (Object) snapshot.createStack());
-                } else {
-                    player.getInventory().offer(snapshot.createStack());
-                }
+                player.getInventory().offer(snapshot.createStack());
             }
         }
     }
@@ -256,7 +248,7 @@ public final class Instance {
                         .execute(new StartTask(this))
                         .interval(1, TimeUnit.SECONDS)
                         .name(Constants.Meta.ID + " - Start Countdown - " + this.worldName)
-                        .submit(Special.instance)
+                        .submit(Skywars.instance)
                         .getUniqueId());
                 break;
             case POST_START:
@@ -264,7 +256,7 @@ public final class Instance {
                         .execute(new ProgressTask(this))
                         .interval(1, TimeUnit.SECONDS)
                         .name(Constants.Meta.ID + " - Progress Countdown - " + this.worldName)
-                        .submit(Special.instance)
+                        .submit(Skywars.instance)
                         .getUniqueId());
                 break;
             case RUNNING:
@@ -275,7 +267,7 @@ public final class Instance {
                         .execute(new CleanupTask(this))
                         .interval(1, TimeUnit.SECONDS)
                         .name(Constants.Meta.ID + " - Cleanup - " + this.worldName)
-                        .submit(Special.instance)
+                        .submit(Skywars.instance)
                         .getUniqueId());
                 break;
             case PRE_END:
@@ -286,12 +278,12 @@ public final class Instance {
                         .execute(new EndTask(this, winners))
                         .interval(1, TimeUnit.SECONDS)
                         .name(Constants.Meta.ID + " - End Countdown - " + this.worldName)
-                        .submit(Special.instance)
+                        .submit(Skywars.instance)
                         .getUniqueId());
                 break;
             case POST_END:
             case FORCE_STOP:
-                Special.instance.getInstanceManager().unloadInstance(this);
+                Skywars.instance.getInstanceManager().unloadInstance(this);
                 break;
         }
     }

@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,13 +22,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special.instance.configuration;
+package org.spongepowered.skywars.instance.configuration;
 
 import ninja.leaping.configurate.objectmapping.Setting;
 import ninja.leaping.configurate.objectmapping.serialize.ConfigSerializable;
-import org.spongepowered.special.configuration.AbstractConfiguration;
-import org.spongepowered.special.instance.configuration.category.GeneralCategory;
-import org.spongepowered.special.instance.configuration.category.RoundCategory;
+import org.spongepowered.skywars.configuration.AbstractConfiguration;
+import org.spongepowered.skywars.instance.configuration.category.GeneralCategory;
+import org.spongepowered.skywars.instance.configuration.category.RoundCategory;
 
 @ConfigSerializable
 public final class InstanceTypeConfiguration extends AbstractConfiguration {

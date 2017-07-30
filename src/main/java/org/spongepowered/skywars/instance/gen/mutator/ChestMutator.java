@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special.instance.gen.mutator;
+package org.spongepowered.skywars.instance.gen.mutator;
 
 import org.spongepowered.api.block.BlockState;
 import org.spongepowered.api.block.BlockTypes;
@@ -32,10 +32,10 @@ import org.spongepowered.api.block.tileentity.carrier.Chest;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.util.weighted.LootTable;
 import org.spongepowered.api.world.extent.Extent;
-import org.spongepowered.special.Special;
-import org.spongepowered.special.instance.Instance;
-import org.spongepowered.special.instance.gen.loot.ItemArchetype;
-import org.spongepowered.special.instance.gen.loot.Loot;
+import org.spongepowered.skywars.Skywars;
+import org.spongepowered.skywars.instance.Instance;
+import org.spongepowered.skywars.instance.gen.loot.ItemArchetype;
+import org.spongepowered.skywars.instance.gen.loot.Loot;
 
 import java.util.List;
 
@@ -49,11 +49,11 @@ public final class ChestMutator extends SignMutator {
     public BlockState visitSign(Instance instance, Extent area, BlockState state, int x, int y, int z, Sign sign) {
         final String lootTableId = sign.lines().get(1).toPlain();
         final LootTable<ItemArchetype> lootTable = Loot.getTable(lootTableId);
-        final List<ItemArchetype> items = lootTable.get(Special.instance.getRandom());
+        final List<ItemArchetype> items = lootTable.get(Skywars.instance.getRandom());
 
-        Special.instance.getLogger().debug("Generating loot chest via table [" + lootTableId + "] at " + x + "x " + y + "y " + z + "z.");
+        Skywars.instance.getLogger().debug("Generating loot chest via table [" + lootTableId + "] at " + x + "x " + y + "y " + z + "z.");
 
-        area.setBlock(x, y, z, BlockTypes.CHEST.getDefaultState().with(Keys.DIRECTION, state.get(Keys.DIRECTION).orElse(null)).orElse(null), Special
+        area.setBlock(x, y, z, BlockTypes.CHEST.getDefaultState().with(Keys.DIRECTION, state.get(Keys.DIRECTION).orElse(null)).orElse(null), Skywars
                 .instance.getPluginCause());
 
         final TileEntity tileEntity = area.getTileEntity(x, y, z).orElse(null);
@@ -67,7 +67,7 @@ public final class ChestMutator extends SignMutator {
 
         final Chest chest = (Chest) tileEntity;
         for (ItemArchetype item : items) {
-            chest.getInventory().offer(item.create(Special.instance.getRandom()));
+            chest.getInventory().offer(item.create(Skywars.instance.getRandom()));
         }
 
         return state;

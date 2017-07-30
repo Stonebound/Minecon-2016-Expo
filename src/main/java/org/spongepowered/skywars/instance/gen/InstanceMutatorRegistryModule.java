@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special.instance.gen;
+package org.spongepowered.skywars.instance.gen;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -31,9 +31,9 @@ import org.spongepowered.api.registry.AdditionalCatalogRegistryModule;
 import org.spongepowered.api.registry.CatalogTypeAlreadyRegisteredException;
 import org.spongepowered.api.registry.RegistrationPhase;
 import org.spongepowered.api.registry.util.DelayedRegistration;
-import org.spongepowered.special.Special;
-import org.spongepowered.special.instance.gen.mutator.ChestMutator;
-import org.spongepowered.special.instance.gen.mutator.PlayerSpawnMutator;
+import org.spongepowered.skywars.Skywars;
+import org.spongepowered.skywars.instance.gen.mutator.ChestMutator;
+import org.spongepowered.skywars.instance.gen.mutator.PlayerSpawnMutator;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -75,7 +75,7 @@ public final class InstanceMutatorRegistryModule implements AdditionalCatalogReg
 
         this.maps.put(extraCatalog.getId(), extraCatalog);
 
-        Special.instance.getLogger().info("Registered map mutator [{}].", extraCatalog.getId());
+        Skywars.instance.getLogger().info("Registered map mutator [{}].", extraCatalog.getId());
     }
 
     @Override

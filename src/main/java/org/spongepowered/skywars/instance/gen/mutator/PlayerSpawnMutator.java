@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,15 +22,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special.instance.gen.mutator;
+package org.spongepowered.skywars.instance.gen.mutator;
 
 import com.flowpowered.math.vector.Vector3d;
 import org.spongepowered.api.block.BlockState;
 import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.block.tileentity.Sign;
 import org.spongepowered.api.world.extent.Extent;
-import org.spongepowered.special.Special;
-import org.spongepowered.special.instance.Instance;
+import org.spongepowered.skywars.Skywars;
+import org.spongepowered.skywars.instance.Instance;
 
 public final class PlayerSpawnMutator extends SignMutator {
 
@@ -40,11 +40,11 @@ public final class PlayerSpawnMutator extends SignMutator {
 
     @Override
     public BlockState visitSign(Instance instance, Extent area, BlockState state, int x, int y, int z, Sign sign) {
-        area.setBlock(x, y, z, BlockTypes.AIR.getDefaultState(), Special.instance.getPluginCause());
+        area.setBlock(x, y, z, BlockTypes.AIR.getDefaultState(), Skywars.instance.getPluginCause());
 
         instance.addPlayerSpawn(new Vector3d(x + 0.5, y + 0.0125, z + 0.5));
 
-        Special.instance.getLogger().info("Found player spawn at " + x + "x " + y + "y " + z + "z.");
+        Skywars.instance.getLogger().info("Found player spawn at " + x + "x " + y + "y " + z + "z.");
 
         return state;
     }

@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special.instance.scoreboard;
+package org.spongepowered.skywars.instance.scoreboard;
 
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.scoreboard.Score;
@@ -34,7 +34,7 @@ import org.spongepowered.api.scoreboard.objective.Objective;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.text.format.TextStyles;
-import org.spongepowered.special.instance.Instance;
+import org.spongepowered.skywars.instance.Instance;
 
 import java.util.ArrayList;
 import java.util.Comparator;

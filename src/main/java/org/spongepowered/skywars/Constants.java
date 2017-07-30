@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special;
+package org.spongepowered.skywars;
 
 import ninja.leaping.configurate.ConfigurationOptions;
 import org.spongepowered.api.entity.living.player.gamemode.GameModes;
@@ -37,8 +37,8 @@ import org.spongepowered.api.world.SerializationBehaviors;
 import org.spongepowered.api.world.WorldArchetype;
 import org.spongepowered.api.world.WorldArchetypes;
 import org.spongepowered.api.world.difficulty.Difficulties;
-import org.spongepowered.special.instance.gen.InstanceMutator;
-import org.spongepowered.special.instance.gen.InstanceMutatorRegistryModule;
+import org.spongepowered.skywars.instance.gen.InstanceMutator;
+import org.spongepowered.skywars.instance.gen.InstanceMutatorRegistryModule;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -58,8 +58,8 @@ public class Constants {
 
         // TODO Gradle Replacements
 
-        public static final String ID = "special";
-        static final String NAME = "Special";
+        public static final String ID = "skywars";
+        static final String NAME = "Sponge Skywars";
         static final String VERSION = "1.10.2-r5.0";
         static final String AUTHORS = "SpongePowered";
         static final String URL = "https://www.spongepowered.org";
@@ -71,7 +71,7 @@ public class Constants {
 
     public static final class Map {
 
-        public static final Path PATH_CONFIG_INSTANCE_TYPES = Special.instance.getConfigPath().resolve("types");
+        public static final Path PATH_CONFIG_INSTANCE_TYPES = Skywars.instance.getConfigPath().resolve("types");
 
         public static final TextTemplate DEFAULT_TEXT_TEMPLATE_NAME = TextTemplate.of(TextTemplate.arg("name").color(TextColors.RED));
 

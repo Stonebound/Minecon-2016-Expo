@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special.instance.task;
+package org.spongepowered.skywars.instance.task;
 
 import org.spongepowered.api.entity.living.player.User;
 import org.spongepowered.api.scheduler.Task;
@@ -30,7 +30,7 @@ import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.text.title.Title;
 import org.spongepowered.api.world.World;
-import org.spongepowered.special.instance.Instance;
+import org.spongepowered.skywars.instance.Instance;
 
 import java.util.LinkedList;
 import java.util.List;

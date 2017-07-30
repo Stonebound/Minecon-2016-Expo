@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special;
+package org.spongepowered.skywars;
 
 import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
@@ -38,11 +38,11 @@ import org.spongepowered.api.event.message.MessageChannelEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
 import org.spongepowered.api.text.Text;
-import org.spongepowered.special.instance.InstanceManager;
-import org.spongepowered.special.instance.InstanceType;
-import org.spongepowered.special.instance.InstanceTypeRegistryModule;
-import org.spongepowered.special.instance.gen.InstanceMutator;
-import org.spongepowered.special.instance.gen.InstanceMutatorRegistryModule;
+import org.spongepowered.skywars.instance.InstanceManager;
+import org.spongepowered.skywars.instance.InstanceType;
+import org.spongepowered.skywars.instance.InstanceTypeRegistryModule;
+import org.spongepowered.skywars.instance.gen.InstanceMutator;
+import org.spongepowered.skywars.instance.gen.InstanceMutatorRegistryModule;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -58,9 +58,9 @@ import javax.inject.Inject;
         url = Constants.Meta.URL,
         description = Constants.Meta.DESCRIPTION
 )
-public final class Special {
+public final class Skywars {
 
-    public static Special instance;
+    public static Skywars instance;
     private final InstanceManager instanceManager = new InstanceManager();
     private final Random random = new Random();
     @Inject private Logger logger;
@@ -92,12 +92,6 @@ public final class Special {
     public void onGameStartingServer(GameStartingServerEvent event) throws IOException {
         Sponge.getServer()
                 .loadWorld(Sponge.getServer().createWorldProperties(Constants.Map.Lobby.DEFAULT_LOBBY_NAME, Constants.Map.Lobby.lobbyArchetype));
-    }
-
-    @Listener
-    public void onGameChat(MessageChannelEvent.Chat event, @Root Player player) {
-        event.setCancelled(true);
-        player.sendMessage(Text.of("Chat has been disabled."));
     }
 
     public Logger getLogger() {

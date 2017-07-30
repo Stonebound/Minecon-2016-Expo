@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special.instance;
+package org.spongepowered.skywars.instance;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -33,11 +33,11 @@ import org.spongepowered.api.registry.CatalogTypeAlreadyRegisteredException;
 import org.spongepowered.api.registry.RegistrationPhase;
 import org.spongepowered.api.registry.util.DelayedRegistration;
 import org.spongepowered.api.registry.util.RegistrationDependency;
-import org.spongepowered.special.Constants;
-import org.spongepowered.special.Special;
-import org.spongepowered.special.configuration.MappedConfigurationAdapter;
-import org.spongepowered.special.instance.configuration.InstanceTypeConfiguration;
-import org.spongepowered.special.instance.gen.InstanceMutatorRegistryModule;
+import org.spongepowered.skywars.Constants;
+import org.spongepowered.skywars.Skywars;
+import org.spongepowered.skywars.configuration.MappedConfigurationAdapter;
+import org.spongepowered.skywars.instance.configuration.InstanceTypeConfiguration;
+import org.spongepowered.skywars.instance.gen.InstanceMutatorRegistryModule;
 
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -81,7 +81,7 @@ public final class InstanceTypeRegistryModule implements AdditionalCatalogRegist
 
         this.types.put(extraCatalog.getId(), extraCatalog);
 
-        Special.instance.getLogger().info("Registered instance type [{}].", extraCatalog.getId());
+        Skywars.instance.getLogger().info("Registered instance type [{}].", extraCatalog.getId());
     }
 
     @Override
@@ -107,7 +107,7 @@ public final class InstanceTypeRegistryModule implements AdditionalCatalogRegist
                 try {
                     adapter.load();
                 } catch (IOException | ObjectMappingException e) {
-                    Special.instance.getLogger().error("Failed to load configuration for path [{}]!", path, e);
+                    Skywars.instance.getLogger().error("Failed to load configuration for path [{}]!", path, e);
                     continue;
                 }
 

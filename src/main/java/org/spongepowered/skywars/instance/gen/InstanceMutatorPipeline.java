@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,15 +22,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special.instance.gen;
+package org.spongepowered.skywars.instance.gen;
 
 import com.flowpowered.math.vector.Vector3i;
 import com.google.common.base.Objects;
 import org.spongepowered.api.block.BlockState;
 import org.spongepowered.api.util.PositionOutOfBoundsException;
 import org.spongepowered.api.world.extent.Extent;
-import org.spongepowered.special.Special;
-import org.spongepowered.special.instance.Instance;
+import org.spongepowered.skywars.Skywars;
+import org.spongepowered.skywars.instance.Instance;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -53,11 +53,11 @@ public final class InstanceMutatorPipeline {
         final Extent area = instance.getHandle().get().getExtentView(instance.getType().getBlockMin(), instance.getType().getBlockMax());
 
         if (!tryFastPass) {
-            Special.instance.getLogger().error("[Mutator] Instance {} is not eligible for a fast pass! Using slow pass.", instance.getName());
+            Skywars.instance.getLogger().error("[Mutator] Instance {} is not eligible for a fast pass! Using slow pass.", instance.getName());
         }
 
         if (tryFastPass && canPerformFastPass(instance.getName(), area)) {
-            Special.instance.getLogger().error("[Mutator] Pre-flight checks succeeded! Performing fast pass for instance {}.", instance.getName());
+            Skywars.instance.getLogger().error("[Mutator] Pre-flight checks succeeded! Performing fast pass for instance {}.", instance.getName());
 
             for (InstanceMutator mutator : this.mutators) {
                 mutator.visitInstance(instance);
@@ -79,10 +79,10 @@ public final class InstanceMutatorPipeline {
         Map<Vector3i, BlockState> cache = new HashMap<>();
 
         Vector3i size = instance.getType().getBlockSize();
-        Special.instance.getLogger().error("[Mutator] Performing slow pass for instance {} - {} blocks total.", instance.getName(), size.getX() *
+        Skywars.instance.getLogger().error("[Mutator] Performing slow pass for instance {} - {} blocks total.", instance.getName(), size.getX() *
                 size.getY() * size.getZ());
 
-        area.getBlockWorker(Special.instance.getPluginCause()).iterate((v, x, y, z) -> {
+        area.getBlockWorker(Skywars.instance.getPluginCause()).iterate((v, x, y, z) -> {
             for (InstanceMutator mutator : this.mutators) {
                 BlockState expectedState = mutator.visitBlock(instance, area, v.getBlock(x, y, z), x, y, z);
                 if (expectedState != null) {
@@ -99,19 +99,19 @@ public final class InstanceMutatorPipeline {
 
         // We don't have any cached positions, so we can't do a fast pass
         if (cache == null) {
-            Special.instance.getLogger().error("[Mutator] No cached positions for instance {} were found. Falling back to slow pass.", name);
+            Skywars.instance.getLogger().error("[Mutator] No cached positions for instance {} were found. Falling back to slow pass.", name);
             return false;
         }
 
         for (Map.Entry<Vector3i, BlockState> entry : cache.entrySet()) {
             try {
                 if (!extent.getBlock(entry.getKey()).equals(entry.getValue())) {
-                    Special.instance.getLogger().error("[Mutator] Mutator mismatch! At position {}, expected {} but found {}. Falling back to slow "
+                    Skywars.instance.getLogger().error("[Mutator] Mutator mismatch! At position {}, expected {} but found {}. Falling back to slow "
                                     + "pass.", entry.getKey(), entry.getValue(), extent.getBlock(entry.getKey()));
                     return false;
                 }
             } catch (PositionOutOfBoundsException e) {
-                Special.instance.getLogger().error("[Mutator] Position {} was out of bounds (not sure how this happened). Falling back to slow pass"
+                Skywars.instance.getLogger().error("[Mutator] Position {} was out of bounds (not sure how this happened). Falling back to slow pass"
                         + ".", entry.getKey());
                 e.printStackTrace();
                 return false;

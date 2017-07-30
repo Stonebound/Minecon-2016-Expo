@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,13 +22,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special.instance.task;
+package org.spongepowered.skywars.instance.task;
 
 import com.flowpowered.math.vector.Vector3d;
-import com.google.common.collect.Lists;
-import net.minecraft.init.MobEffects;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionUtils;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.data.type.HandTypes;
@@ -56,8 +52,8 @@ import org.spongepowered.api.text.title.Title;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 import org.spongepowered.api.world.explosion.Explosion;
-import org.spongepowered.special.Special;
-import org.spongepowered.special.instance.Instance;
+import org.spongepowered.skywars.Skywars;
+import org.spongepowered.skywars.instance.Instance;
 
 import java.util.Random;
 
@@ -80,7 +76,7 @@ public final class CleanupTask extends InstanceTask {
     public void accept(Task task) {
         this.handle = task;
 
-        final Random random = Special.instance.getRandom();
+        final Random random = Skywars.instance.getRandom();
         final World world = this.getInstance().getHandle().orElse(null);
 
         if (world != null && world.isLoaded()) {
@@ -140,12 +136,12 @@ public final class CleanupTask extends InstanceTask {
                             normalGoal.addTask(1, RangeAgentAITask.builder().moveSpeed(0.4D).attackRadius(20f).delayBetweenAttacks(10).build((Ranger)
                                     human));
                             human.setItemInHand(HandTypes.MAIN_HAND, ItemStack.of(ItemTypes.BOW, 1));
-                            ItemStack tipped = ItemStack.of(ItemTypes.TIPPED_ARROW, 1);
+/*                            ItemStack tipped = ItemStack.of(ItemTypes.TIPPED_ARROW, 1);
                             tipped = (ItemStack) (Object) PotionUtils.appendEffects((net.minecraft.item.ItemStack) (Object) tipped, Lists
                                     .newArrayList(new PotionEffect
                                             (MobEffects.GLOWING, 60), new PotionEffect(MobEffects.SLOWNESS, 60)));
 
-                            human.setItemInHand(HandTypes.OFF_HAND, tipped);
+                            human.setItemInHand(HandTypes.OFF_HAND, tipped);*/
                             ranger = true;
                         } else {
                             normalGoal.addTask(1, AttackLivingAITask.builder().longMemory().speed(0.4D).build(human));
@@ -158,7 +154,7 @@ public final class CleanupTask extends InstanceTask {
 
                         human.offer(Keys.DISPLAY_NAME, Text.of(ranger ? TextColors.GREEN : TextColors.BLUE, ranger ? "Ranger" : "Swordsman"));
 
-                        world.spawnEntity(human, Special.instance.getPluginCause());
+                        world.spawnEntity(human, Skywars.instance.getPluginCause());
                     }
                 }
             } else {
@@ -177,7 +173,7 @@ public final class CleanupTask extends InstanceTask {
                             .shouldPlaySmoke(true)
                             .radius(5)
                             .location(explosionLocation)
-                            .build(), Special.instance.getPluginCause()
+                            .build(), Skywars.instance.getPluginCause()
                     );
                 }
             }

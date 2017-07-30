@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,15 +22,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special.instance.gen;
+package org.spongepowered.skywars.instance.gen;
 
 import com.google.common.base.Objects;
 import org.spongepowered.api.CatalogType;
 import org.spongepowered.api.block.BlockState;
 import org.spongepowered.api.util.annotation.CatalogedBy;
 import org.spongepowered.api.world.extent.Extent;
-import org.spongepowered.special.Special;
-import org.spongepowered.special.instance.Instance;
+import org.spongepowered.skywars.Skywars;
+import org.spongepowered.skywars.instance.Instance;
 
 @CatalogedBy(InstanceMutators.class)
 public abstract class InstanceMutator implements CatalogType {
@@ -54,7 +54,7 @@ public abstract class InstanceMutator implements CatalogType {
     }
 
     void visitInstance(Instance instance) {
-        Special.instance.getLogger().info("Mutating instance [" + instance.getName() + "] with mutator [" + this.getId() + "]...");
+        Skywars.instance.getLogger().info("Mutating instance [" + instance.getName() + "] with mutator [" + this.getId() + "]...");
     }
 
     public BlockState visitBlock(Instance instance, Extent area, BlockState state, int x, int y, int z) {

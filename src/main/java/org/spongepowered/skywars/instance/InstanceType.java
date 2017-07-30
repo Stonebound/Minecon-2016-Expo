@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special.instance;
+package org.spongepowered.skywars.instance;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -36,12 +36,12 @@ import org.spongepowered.api.item.inventory.ItemStackSnapshot;
 import org.spongepowered.api.text.TextTemplate;
 import org.spongepowered.api.util.ResettableBuilder;
 import org.spongepowered.api.util.annotation.CatalogedBy;
-import org.spongepowered.special.Constants;
-import org.spongepowered.special.configuration.MappedConfigurationAdapter;
-import org.spongepowered.special.instance.configuration.InstanceTypeConfiguration;
-import org.spongepowered.special.instance.gen.InstanceMutator;
-import org.spongepowered.special.instance.gen.InstanceMutatorPipeline;
-import org.spongepowered.special.instance.gen.InstanceMutatorRegistryModule;
+import org.spongepowered.skywars.Constants;
+import org.spongepowered.skywars.configuration.MappedConfigurationAdapter;
+import org.spongepowered.skywars.instance.configuration.InstanceTypeConfiguration;
+import org.spongepowered.skywars.instance.gen.InstanceMutator;
+import org.spongepowered.skywars.instance.gen.InstanceMutatorPipeline;
+import org.spongepowered.skywars.instance.gen.InstanceMutatorRegistryModule;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -98,7 +98,7 @@ public final class InstanceType implements CatalogType {
         this.min = new Vector3i(builder.centerX + builder.minX, builder.minY, builder.centerZ + builder.minZ);
         this.max = new Vector3i(builder.centerX + builder.maxX, builder.maxY, builder.centerZ + builder.maxZ).sub(1, 1, 1);
         this.worldBorderX = builder.worldBorderX;
-        this.worldBorderX = builder.worldBorderZ;
+        this.worldBorderZ = builder.worldBorderZ;
         this.worldBorderRadius = builder.worldBorderRadius;
     }
 

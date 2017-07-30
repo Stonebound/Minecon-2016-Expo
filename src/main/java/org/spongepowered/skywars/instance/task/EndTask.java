@@ -1,5 +1,5 @@
 /**
- * This file is part of Special, licensed under the MIT License (MIT).
+ * This file is part of Skywars, licensed under the MIT License (MIT).
  *
  * Copyright (c) SpongePowered <http://github.com/SpongePowered>
  * Copyright (c) contributors
@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.special.instance.task;
+package org.spongepowered.skywars.instance.task;
 
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.data.key.Keys;
@@ -34,8 +34,8 @@ import org.spongepowered.api.scheduler.Task;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.text.title.Title;
-import org.spongepowered.special.Special;
-import org.spongepowered.special.instance.Instance;
+import org.spongepowered.skywars.Skywars;
+import org.spongepowered.skywars.instance.Instance;
 
 import java.util.List;
 import java.util.Optional;
@@ -102,7 +102,7 @@ public final class EndTask extends InstanceTask {
             if (winner.isPresent()) {
                 winner.get().spawnParticles(ParticleEffect.builder()
                                 .type(ParticleTypes.FIREWORKS_SPARK)
-                                .count(30)
+                                .quantity(30)
                                 .build(),
                         winner.get().getLocation().getPosition());
 
@@ -120,7 +120,7 @@ public final class EndTask extends InstanceTask {
 
                 Sponge.getServer().getBroadcastChannel()
                         .send(Text.of(TextColors.RED, winner.get().getName(), TextColors.RESET, " has won the game!"));
-                Special.instance.getLogger().info("Round finished!");
+                Skywars.instance.getLogger().info("Round finished!");
             }
         }
 
