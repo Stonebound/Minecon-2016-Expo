@@ -40,6 +40,7 @@ import org.spongepowered.api.world.difficulty.Difficulties;
 import org.spongepowered.skywars.instance.gen.InstanceMutator;
 import org.spongepowered.skywars.instance.gen.InstanceMutatorRegistryModule;
 
+import javax.xml.bind.annotation.XmlType;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -102,8 +103,10 @@ public class Constants {
             }
 
             DEFAULT_MAP_MUTATOR_IDS.add("player_spawn");
+            DEFAULT_MAP_MUTATOR_IDS.add("chest");
 
             DEFAULT_MAP_MUTATORS.add(InstanceMutatorRegistryModule.getInstance().getById("player_spawn").get());
+            DEFAULT_MAP_MUTATORS.add(InstanceMutatorRegistryModule.getInstance().getById("chest").get());
         }
 
         private Map() {
@@ -140,13 +143,13 @@ public class Constants {
             public static final String DEFAULT_LOBBY_NAME = Constants.Meta.ID + "_lobby";
             public static final String SIGN_HEADER = "Join Game";
 
-            static final WorldArchetype lobbyArchetype = WorldArchetype.builder().from(WorldArchetypes.THE_END)
+            static final WorldArchetype lobbyArchetype = WorldArchetype.builder().from(WorldArchetypes.THE_VOID)
                     .gameMode(GameModes.SURVIVAL)
                     .loadsOnStartup(true)
-                    .difficulty(Difficulties.EASY)
+                    .difficulty(Difficulties.PEACEFUL)
                     .generateSpawnOnLoad(true)
                     .dimension(DimensionTypes.OVERWORLD)
-                    .generator(GeneratorTypes.THE_END)
+                    .generator(GeneratorTypes.FLAT)
                     .pvp(false)
                     .keepsSpawnLoaded(true)
                     .serializationBehavior(SerializationBehaviors.NONE)

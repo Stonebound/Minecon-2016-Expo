@@ -486,10 +486,10 @@ public final class InstanceManager {
     @Listener
     public void onChangeBlock(ChangeBlockEvent event, @First Player player) {
         String name = event.getTargetWorld().getName();
-        if (name.equalsIgnoreCase(Constants.Map.Lobby.DEFAULT_LOBBY_NAME)) {
-            event.setCancelled(true);
-            return;
-        }
+//        if (name.equalsIgnoreCase(Constants.Map.Lobby.DEFAULT_LOBBY_NAME)) {
+//            event.setCancelled(true);
+//            return;
+//        }
 
         if (!this.getInstance(name).isPresent() && this.canUseFastPass.contains(name)) {
             this.setWorldModified(name, true);
@@ -503,7 +503,7 @@ public final class InstanceManager {
 
     private void giveLobbySetting(Player player) {
         player.setScoreboard(Sponge.getServer().getServerScoreboard().orElse(null));
-        player.offer(Keys.GAME_MODE, GameModes.SURVIVAL);
+        player.offer(Keys.GAME_MODE, GameModes.ADVENTURE);
         Utils.resetHealthHungerAndPotions(player);
     }
 

@@ -65,7 +65,6 @@ abstract class SignMutator extends InstanceMutator {
             if (sign.lines().get(1).toPlain().equalsIgnoreCase(this.sign_id)) {
                 Skywars.instance.getLogger().error("Found mismatched sign at {}x {}y {}z!", x, y, z);
             } else {
-                Skywars.instance.getLogger().warn("Sign at {}x {}y {}z!", sign.lines().get(0).toPlain());
                 return null;
             }
         }
