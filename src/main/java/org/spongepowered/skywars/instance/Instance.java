@@ -27,6 +27,7 @@ package org.spongepowered.skywars.instance;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.flowpowered.math.vector.Vector3d;
+import com.flowpowered.math.vector.Vector3i;
 import com.google.common.collect.Queues;
 import com.google.common.collect.Sets;
 import org.spongepowered.api.Sponge;
@@ -73,6 +74,8 @@ public final class Instance {
     private final Map<UUID, PlayerDeathRecord> playerDeaths = new HashMap<>();
     private final Set<UUID> tasks = Sets.newLinkedHashSet();
     private final RoundScoreboard scoreboard;
+    private final Vector3i respawnCoords;
+    private final String respawnWorld;
     private State state = State.IDLE;
 
     public Instance(String worldName, InstanceType instanceType, World world) {
@@ -80,6 +83,8 @@ public final class Instance {
         this.instanceType = instanceType;
         this.worldRef = new WeakReference<>(world);
         this.scoreboard = new RoundScoreboard(this);
+        this.respawnCoords = instanceType.getRespawnCoords();
+        this.respawnWorld = instanceType.getRespawnWorld();
         world.getWorldBorder().setCenter(instanceType.getWorldBorderX(), instanceType.getWorldBorderZ());
         world.getWorldBorder().setDiameter(instanceType.getWorldBorderRadius() * 2);
         world.getWorldBorder().setWarningDistance(0);
@@ -103,6 +108,14 @@ public final class Instance {
 
     RoundScoreboard getScoreboard() {
         return scoreboard;
+    }
+
+    public Vector3i getRespawnCoords() {
+        return respawnCoords;
+    }
+
+    public String getRespawnWorld() {
+        return respawnWorld;
     }
 
     public Set<UUID> getRegisteredPlayers() {

@@ -189,7 +189,7 @@ public final class InstanceManager {
 
         final World respawnWorld = server.getWorld(Constants.Map.DEFAULT_RESPAWN_WORLD).orElseThrow(() -> new RuntimeException("World was not "
                 + "found!"));
-        final Location respawnLocation = new Location(respawnWorld, Constants.Map.DEFAULT_RESPAWN_X, Constants.Map.DEFAULT_RESPAWN_Y, Constants.Map.DEFAULT_RESPAWN_Z);
+        final Location respawnLocation = new Location(respawnWorld, instance.getRespawnCoords());
 
         // Move everyone out
         for (Player player : world.getPlayers()) {

@@ -70,7 +70,11 @@ public final class InstanceType implements CatalogType {
     private int worldBorderX;
     private int worldBorderZ;
     private int worldBorderRadius;
-    private Vector3i min, max, size;
+    private String respawnWorld;
+    private int respawnX;
+    private int respawnY;
+    private int respawnZ;
+    private Vector3i min, max, size, respawnCoords;
     private InstanceMutatorPipeline mutatorPipeline;
 
     private InstanceType(String id, Builder builder) {
@@ -85,6 +89,10 @@ public final class InstanceType implements CatalogType {
         this.maxX = builder.maxX;
         this.maxY = builder.maxY;
         this.maxZ = builder.maxZ;
+        this.respawnWorld = builder.respawnWorld;
+        this.respawnX = builder.respawnX;
+        this.respawnY = builder.respawnY;
+        this.respawnZ = builder.respawnZ;
         this.mutatorPipeline = new InstanceMutatorPipeline();
         this.mutatorPipeline.getMutators().addAll(builder.mutators);
         this.defaultItems = builder.defaultItems;
@@ -94,6 +102,7 @@ public final class InstanceType implements CatalogType {
         this.roundEndTemplate = builder.roundEndTemplate;
         this.roundEndLength = builder.roundEndLength;
         this.automaticStartPlayerCount = builder.automaticStartPlayerCount;
+        this.respawnCoords =  new Vector3i(builder.respawnX, builder.respawnY, builder.respawnZ);
         this.size = new Vector3i(builder.maxX - builder.minX, builder.maxY - builder.minY, builder.maxZ - builder.minZ);
         this.min = new Vector3i(builder.centerX + builder.minX, builder.minY, builder.centerZ + builder.minZ);
         this.max = new Vector3i(builder.centerX + builder.maxX, builder.maxY, builder.centerZ + builder.maxZ).sub(1, 1, 1);
@@ -166,6 +175,14 @@ public final class InstanceType implements CatalogType {
         return this.size;
     }
 
+    public Vector3i getRespawnCoords() {
+        return respawnCoords;
+    }
+
+    public String getRespawnWorld() {
+        return respawnWorld;
+    }
+
     public int getWorldBorderX() {
         return this.worldBorderX;
     }
@@ -193,6 +210,10 @@ public final class InstanceType implements CatalogType {
         this.maxX = value.general.maxX;
         this.maxY = value.general.maxY;
         this.maxZ = value.general.maxZ;
+        this.respawnWorld = value.general.respawnWorld;
+        this.respawnX = value.general.respawnX;
+        this.respawnY = value.general.respawnY;
+        this.respawnZ = value.general.respawnZ;
         this.mutatorPipeline.getMutators().clear();
         this.mutatorPipeline.getMutators().addAll(InstanceMutatorRegistryModule.getInstance().mapStrings(value.general.mapMutators));
         this.defaultItems.clear();
@@ -244,6 +265,10 @@ public final class InstanceType implements CatalogType {
                 ", maxX=" + maxX +
                 ", maxY=" + maxY +
                 ", maxZ=" + maxZ +
+                ", respawnWorld='" + respawnWorld + '\'' +
+                ", respawnX=" + respawnX +
+                ", respawnX=" + respawnX +
+                ", respawnZ=" + respawnZ +
                 ", automaticStartPlayerCount=" + automaticStartPlayerCount +
                 ", min=" + min +
                 ", max=" + max +
@@ -269,6 +294,10 @@ public final class InstanceType implements CatalogType {
         private int maxX;
         private int maxY;
         private int maxZ;
+        private String respawnWorld;
+        private int respawnX;
+        private int respawnY;
+        private int respawnZ;
         private int worldBorderX;
         private int worldBorderZ;
         private int worldBorderRadius;
@@ -289,6 +318,10 @@ public final class InstanceType implements CatalogType {
             this.maxX = value.maxX;
             this.maxY = value.maxY;
             this.maxZ = value.maxZ;
+            this.respawnWorld = value.respawnWorld;
+            this.respawnX = value.respawnX;
+            this.respawnY = value.respawnY;
+            this.respawnZ = value.respawnZ;
             this.worldBorderX = value.worldBorderX;
             this.worldBorderZ = value.worldBorderZ;
             this.worldBorderRadius = value.worldBorderRadius;
@@ -315,6 +348,10 @@ public final class InstanceType implements CatalogType {
             this.maxX = value.general.maxX;
             this.maxY = value.general.maxY;
             this.maxZ = value.general.maxZ;
+            this.respawnWorld = value.general.respawnWorld;
+            this.respawnX = value.general.respawnX;
+            this.respawnY = value.general.respawnY;
+            this.respawnZ = value.general.respawnZ;
             this.worldBorderX = value.general.worldBorderCenterX;
             this.worldBorderZ = value.general.worldBorderCenterZ;
             this.worldBorderRadius = value.general.worldBorderRadius;
@@ -349,6 +386,10 @@ public final class InstanceType implements CatalogType {
             this.maxX = Constants.Map.DEFAULT_MAP_WIDTH;
             this.maxY = Constants.Map.DEFAULT_MAP_MAX_Y;
             this.maxZ = Constants.Map.DEFAULT_MAP_WIDTH;
+            this.respawnWorld = Constants.Map.DEFAULT_RESPAWN_WORLD;
+            this.respawnX = Constants.Map.DEFAULT_RESPAWN_X;
+            this.respawnY = Constants.Map.DEFAULT_RESPAWN_Y;
+            this.respawnZ = Constants.Map.DEFAULT_RESPAWN_Z;
             this.worldBorderX = Constants.Map.DEFAULT_WORLD_BORDER_CENTER_X;
             this.worldBorderZ = Constants.Map.DEFAULT_WORLD_BORDER_CENTER_Z;
             this.worldBorderRadius = Constants.Map.DEFAULT_WORLD_BORDER_RADIUS;
@@ -452,6 +493,10 @@ public final class InstanceType implements CatalogType {
             config.general.maxX = this.maxX;
             config.general.maxY = this.maxY;
             config.general.maxZ = this.maxZ;
+            config.general.respawnWorld = this.respawnWorld;
+            config.general.respawnX = this.respawnX;
+            config.general.respawnY = this.respawnY;
+            config.general.respawnZ = this.respawnZ;
             config.general.worldBorderCenterX = this.worldBorderX;
             config.general.worldBorderCenterZ = this.worldBorderZ;
             config.general.worldBorderRadius = this.worldBorderRadius;
