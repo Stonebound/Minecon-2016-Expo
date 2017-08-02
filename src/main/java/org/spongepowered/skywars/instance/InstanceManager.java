@@ -187,8 +187,9 @@ public final class InstanceManager {
             return;
         }
 
-        final World lobby = server.getWorld(Constants.Map.Lobby.DEFAULT_LOBBY_NAME).orElseThrow(() -> new RuntimeException("Lobby world was not "
+        final World respawnWorld = server.getWorld(Constants.Map.DEFAULT_RESPAWN_WORLD).orElseThrow(() -> new RuntimeException("World was not "
                 + "found!"));
+        final Location respawnLocation = new Location(respawnWorld, Constants.Map.DEFAULT_RESPAWN_X, Constants.Map.DEFAULT_RESPAWN_Y, Constants.Map.DEFAULT_RESPAWN_Z);
 
         // Move everyone out
         for (Player player : world.getPlayers()) {
@@ -202,7 +203,7 @@ public final class InstanceManager {
                 player.getInventory().clear();
             }
 
-            player.setLocation(lobby.getSpawnLocation());
+            player.setLocation(respawnLocation);
         }
 
         this.instances.remove(instance.getName());
@@ -265,8 +266,6 @@ public final class InstanceManager {
                     }
                 }
             }
-        } else if (world.getName().equals(Constants.Map.Lobby.DEFAULT_LOBBY_NAME)) {
-            this.giveLobbySetting(player);
         }
     }
 
@@ -286,7 +285,7 @@ public final class InstanceManager {
         final Instance toInstance = getInstance(toWorld.getName()).orElse(null);
 
         // We don't care about non-instances from and to.
-        if (fromInstance == null && toInstance == null && !toWorld.getName().equals(Constants.Map.Lobby.DEFAULT_LOBBY_NAME)) {
+        if (fromInstance == null && toInstance == null) {
             return;
         }
 
@@ -328,7 +327,7 @@ public final class InstanceManager {
                             player.setScoreboard(toInstance.getScoreboard().getHandle());
                         }
 
-                    } else if (toWorld.getName().equals(Constants.Map.Lobby.DEFAULT_LOBBY_NAME)) {
+                    } else if (toWorld.getName().equals(Constants.Map.DEFAULT_RESPAWN_WORLD)) {
                         // Going from a non-instance world to lobby
                         this.giveLobbySetting(player);
                     }
@@ -399,24 +398,6 @@ public final class InstanceManager {
         if (instance != null) {
             if (victim instanceof Player && !instance.getRegisteredPlayers().contains(victim.getUniqueId())) {
                 event.setCancelled(true);
-            }
-        }
-    }
-
-    @Listener
-    public void onDamageEntity(DamageEntityEvent event) {
-        if (event.getTargetEntity() instanceof Player) {
-            final Player player = (Player) event.getTargetEntity();
-
-            final Object root = event.getCause().root();
-
-            if (root instanceof DamageSource) {
-                final DamageSource source = (DamageSource) root;
-
-                if (!(source.getType().equals(DamageTypes.FALL) || source.getType().equals(DamageTypes.VOID)) && player.getWorld().getName()
-                        .equalsIgnoreCase(Constants.Map.Lobby.DEFAULT_LOBBY_NAME)) {
-                    event.setCancelled(true);
-                }
             }
         }
     }

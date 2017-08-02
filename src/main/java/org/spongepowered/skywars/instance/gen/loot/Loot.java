@@ -212,7 +212,7 @@ public final class Loot {
         rare_items.add(item(ItemTypes.ELYTRA, fixed(1)), 0.0125);
 
         // weird_items
-        weird_items.add(    item(   ItemTypes.SPONGE,           range(1, 6)),   15);
+        weird_items.add(    item(   ItemTypes.SPONGE,           range(1, 16)),   15);
         weird_items.add(    item(   ItemTypes.ROTTEN_FLESH,     range(1, 9)),   6);
         weird_items.add(    item(   ItemTypes.POISONOUS_POTATO, range(1, 3)),   2.5);
 

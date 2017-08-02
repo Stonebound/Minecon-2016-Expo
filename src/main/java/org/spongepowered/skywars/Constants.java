@@ -92,6 +92,11 @@ public class Constants {
         public static final int DEFAULT_WORLD_BORDER_CENTER_Z = 0;
         public static final int DEFAULT_WORLD_BORDER_RADIUS = 250;
 
+        public static final String DEFAULT_RESPAWN_WORLD = "world";
+        public static final int DEFAULT_RESPAWN_X = 0;
+        public static final int DEFAULT_RESPAWN_Y = 64;
+        public static final int DEFAULT_RESPAWN_Z = 0;
+
         static {
             if (Files.notExists(PATH_CONFIG_INSTANCE_TYPES)) {
                 try {
@@ -138,21 +143,7 @@ public class Constants {
         }
 
         public static final class Lobby {
-
-            public static final String DEFAULT_LOBBY_NAME = Constants.Meta.ID + "_lobby";
             public static final String SIGN_HEADER = "Join Game";
-
-            static final WorldArchetype lobbyArchetype = WorldArchetype.builder().from(WorldArchetypes.THE_VOID)
-                    .gameMode(GameModes.SURVIVAL)
-                    .loadsOnStartup(true)
-                    .difficulty(Difficulties.PEACEFUL)
-                    .generateSpawnOnLoad(true)
-                    .dimension(DimensionTypes.OVERWORLD)
-                    .generator(GeneratorTypes.FLAT)
-                    .pvp(false)
-                    .keepsSpawnLoaded(true)
-                    .serializationBehavior(SerializationBehaviors.NONE)
-                    .build(Meta.ID + ":lobby", "Lobby");
 
             private Lobby() {
             }

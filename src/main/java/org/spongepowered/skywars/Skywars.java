@@ -88,12 +88,6 @@ public final class Skywars {
         Sponge.getEventManager().registerListeners(this.container, this.instanceManager);
     }
 
-    @Listener
-    public void onGameStartingServer(GameStartingServerEvent event) throws IOException {
-        Sponge.getServer()
-                .loadWorld(Sponge.getServer().createWorldProperties(Constants.Map.Lobby.DEFAULT_LOBBY_NAME, Constants.Map.Lobby.lobbyArchetype));
-    }
-
     public Logger getLogger() {
         return this.logger;
     }

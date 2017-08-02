@@ -108,7 +108,7 @@ final class Commands {
 
                 src.sendMessage(Text.of("Created instance for [", format(TextColors.GREEN, targetProperties.getWorldName()), "]."));
                 for (Player player : Sponge.getServer().getOnlinePlayers()) {
-                    if (player.getWorld().getName().equalsIgnoreCase(Constants.Map.Lobby.DEFAULT_LOBBY_NAME)) {
+                    if (player.getWorld().getName().equalsIgnoreCase(Constants.Map.DEFAULT_RESPAWN_WORLD)) {
 
                         final WorldProperties finalTargetProperties = targetProperties;
                         player.sendMessage(Text.builder().onClick(TextActions.executeCallback(commandSource -> {
@@ -118,7 +118,7 @@ final class Commands {
                                 inst.get().spawnPlayer((Player) commandSource);
                             }
                         })).append(Text.of("[", TextColors.RED, targetProperties.getWorldName(), TextColors.RESET, "] is ready! "
-                                + "Right-click this message or the sign to join!")).build());
+                                + "Click this message to join!")).build());
                     }
                 }
                 return CommandResult.success();

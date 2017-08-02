@@ -85,4 +85,16 @@ public final class GeneralCategory extends AbstractConfigurationCategory {
     @Setting(value = "map-mutators", comment = "Map Mutators to apply after the instance is loaded.")
     public List<String> mapMutators = Constants.Map.DEFAULT_MAP_MUTATOR_IDS;
 
+    @Setting(value = "respawn-world", comment = "The world to spawn in after a game ends.")
+    public String respawnWorld = Constants.Map.DEFAULT_RESPAWN_WORLD;;
+
+    @Setting(value = "respawn-x", comment = "X respawn coordinate")
+    public int respawnX = Constants.Map.DEFAULT_RESPAWN_X;
+
+    @Setting(value = "respawn-y", comment = "Y respawn coordinate")
+    public int respawnY = Constants.Map.DEFAULT_RESPAWN_Y;
+
+    @Setting(value = "respawn-z", comment = "Z respawn coordinate")
+    public int respawnZ = Constants.Map.DEFAULT_RESPAWN_Z;
+
 }
